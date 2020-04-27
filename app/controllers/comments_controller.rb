@@ -1,7 +1,10 @@
 class CommentsController < ApplicationController
   def create
-    comment = Comment.create(comment_params)
-    redirect_to tweet_path(comment.tweet)
+    @comment = Comment.create(comment_params)
+    respond_to do |format|
+      format.html { redirect_to tweet_path(comment.tweet) }
+      format.json
+    end
   end
 
   private
